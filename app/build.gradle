@@ -22,9 +22,21 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
+
+    // https://mvnrepository.com/artifact/commons-cli/commons-cli
+    implementation group: 'commons-cli', name: 'commons-cli', version: '1.5.0'
+
+    implementation 'com.github.gumtreediff:core:3.0.0'
+
+    // https://mvnrepository.com/artifact/com.github.gumtreediff/client
+    implementation group: 'com.github.gumtreediff', name: 'client', version: '3.0.0'
+
+    // https://mvnrepository.com/artifact/com.github.gumtreediff/gen.c
+    implementation group: 'com.github.gumtreediff', name: 'gen.c', version: '3.0.0'
+
 }
 
 application {
     // Define the main class for the application.
-    mainClass = 'patch_translator.App'
+    mainClass = 'patch_translator.Main'
 }
