@@ -4,17 +4,41 @@
 package patch_translator;
 
 import patch_translator.translation.Translator;
+import patch_translator.utils.Parser;
 
 public class Main {
     public static void main(String[] args) {
-        String donerSrcPath = args[0];
-        String donerDstPath = args[1];
-        String doneePath = args[2];
+        if (args[0].equals("-p")) {
+            Parser parser = new Parser(args[1]);
+            System.out.println(parser.parse().toTreeString());
+            return;
+        } else if (args[0].equals("-h") || args.length != 3) {
+            printHelp();
+            return;
+        }
+
+        String donerSrcPath = args[1];
+        String donerDstPath = args[2];
+        String doneePath = args[3];
         System.out.println("Doner Program Source Path: " + donerSrcPath);
         System.out.println("Doner Program Destination Path: " + donerDstPath);
         System.out.println("Donee Program Path: " + doneePath);
-        Translator Translator = new Translator(donerSrcPath, donerDstPath, doneePath);
-//        patchTranslator.translate();
+        Translator translator = new Translator(donerSrcPath, donerDstPath, doneePath);
+        if (args[0].equals("-s")) {
+            translator.printScripts();
+            return;
+        }
+        if (args[0].equals("-d")) {
+            translator.translate();
+        }
 
+    }
+    public static void printHelp() {
+        System.out.println("Usage: <doner_src_path> <doner_dst_path> <donee_src_path> |\n      -p <src_path> |\n       -h");
+        System.out.println("execution with no options:");
+        System.out.println("doner_src_path: path to the source file of the doner program");
+        System.out.println("doner_dst_path: path to the destination file of the doner program");
+        System.out.println("donee_src_path: path to the source file of the donee program");
+        System.out.println("-p <src_path>:\nparse the source file and print the AST");
     }
 }
