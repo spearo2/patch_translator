@@ -12,7 +12,7 @@ public class Main {
             Parser parser = new Parser(args[1]);
             System.out.println(parser.parse().toTreeString());
             return;
-        } else if (args[0].equals("-h") || args.length != 3) {
+        } else if (args[0].equals("-h") || args.length != 4) {
             printHelp();
             return;
         }

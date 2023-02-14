@@ -35,8 +35,14 @@ public class Translator {
         doneeParser = new Parser(DoneePath);
         Tree doneeTree = doneeParser.parse();
         concretizer = new Concretizer(doneeParser.getCodeText(), doneeTree);
+        System.out.println(gumtreeRunner.getEditScript().size() + " actions detected");
+        int count = 1;
         for (Action action : gumtreeRunner.getEditScript()) {
-
+            System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+            System.out.println("Concretizing: " + action.getName() + " (" + count++ +"/"+gumtreeRunner.getEditScript().size()+ ")\n");
+            concretizer.concretize(action);
         }
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n Translation Result: \n");
+        concretizer.printTranslation();
     }
 }
